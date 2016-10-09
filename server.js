@@ -14,7 +14,7 @@ app.get('/scrape', function(req, res){
 
   console.log("what should we name this app?!")
 
-  url = 'http://www.imdb.com/title/tt1229340/';
+  url = 'https://www.angelikafilmcenter.com/nyc';
 
   request(url, function(error, response, html){
     if(!error){
@@ -23,12 +23,10 @@ app.get('/scrape', function(req, res){
       var title, release, rating;
       var json = { title : "", release : "", rating : ""};
 
-      $('.title_wrapper').filter(function(){
+      $('.playing li').filter(function(){
+        debugger
         var data = $(this);
         console.log(data)
-        title = data.children().first().text().trim();
-        release = data.children().last().children().last().text().trim();
-
         json.title = title;
         json.release = release;
       })
@@ -40,8 +38,10 @@ app.get('/scrape', function(req, res){
         json.rating = rating;
       })
     }
+
     var jsonData = JSON.stringify(json, null, 4)
     res.json(jsonData)
+
   })
 })
 
