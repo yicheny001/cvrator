@@ -8,10 +8,11 @@ class App extends Component {
 
   makeRequest(){
     axios.get(`${ROOT_URL}/angelika`).then(response=>{
-      let parsedData = response.data
-      parsedData.playingTitles.map((movie)=>{
-        console.log(movie)
-        return <div> {movie} </div>
+      let movies = response.data
+      debugger
+      movies.map((movie)=>{
+        console.log(movie.title)
+        return <div> {movie.title} </div>
       })
     })
   }
